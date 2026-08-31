@@ -14,26 +14,46 @@ Not Armstrong
 
 */
 #include <stdio.h>
+
 int main()
 {
-    int num, sum=0, temp;
+    int num, sum = 0, temp, digitCount = 0;
     printf("Enter a number: ");
     scanf("%d", &num);
-    temp=num;
-    
-    while(temp!=0)
+    temp = num;
+
+    if (temp == 0)
+        digitCount = 1;
+    else
     {
-        int r=temp%10;
-        sum+=r*r*r;
-        temp/=10;
+        while (temp != 0)
+        {
+            digitCount++;
+            temp /= 10;
+        }
     }
-    if(sum==num)
+
+    temp = num;
+
+    while (temp != 0)
     {
-        printf("Armstrong number\n");
+        int r = temp % 10;
+        int power = 1;
+        for (int i = 1; i <= digitCount; i++)
+        {
+            power *= r;
+        }
+        sum += power;
+        temp /= 10;
     }
-    else 
+
+    if (sum == num)
     {
-        printf("Not an Armstrong number\n");
+        printf("Armstrong\n");
+    }
+    else
+    {
+        printf("Not Armstrong\n");
     }
     return 0;
 }
